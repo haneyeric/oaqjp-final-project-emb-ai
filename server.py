@@ -7,6 +7,8 @@ app = Flask(__name__)
 def detect_emotions(text_to_analyze):
     res = emotion_detector(text_to_analyze)
     dominant_emotion = res.pop('dominant_emotion')
+    if dominant_emotion == None:
+        return {"message": "Invalid text! Please try again!"}
     res_string = str(res)
     res_string = res_string[1:-1]
     mes = "For the given statement, the system response is " + res_string + ". The dominant emotion is " + dominant_emotion + "."
