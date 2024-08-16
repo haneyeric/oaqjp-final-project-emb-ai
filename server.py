@@ -6,4 +6,10 @@ app = Flask(__name__)
 @app.route('/emotionDetector/<string:text_to_analyze>')
 def detect_emotions(text_to_analyze):
     res = emotion_detector(text_to_analyze)
-    return {"message": json.dumps(res)}
+    dominant_emotion = res.pop('dominant_emotion')
+    res_string = str(res)
+    res_string = res_string[1:-1]
+    mes = "For the given statement, the system response is " + res_string + ". The dominant emotion is " + dominant_emotion + "."
+
+
+    return {"message": mes}
